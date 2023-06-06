@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exercise III</title>
+  <!-- Latest compiled and minified Bootstrap 4.4.1 CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <style>
+    .link {
+      border: 1px solid grey;
+      display: block;
+    }
+
+    .link:hover img {
+      opacity: 0.5;
+    }
+
+    .link:hover .heart {
+      display: block;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    .link:hover {
+      text-decoration: none;
+      transform: scale(1.03);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .item {
+      margin-bottom: 30px;
+    }
+
+    .title {
+      max-height: 35px;
+      overflow: hidden;
+      color: dimgrey;
+    }
+
+    .title:first-letter {
+      text-transform: uppercase;
+    }
+
+    .paragraf {
+      max-height: 70px;
+      overflow: hidden;
+      color: grey;
+    }
+
+    .item-content {
+      padding: 10px;
+    }
+
+    .heart {
+      background-color: transparent;
+      color: grey;
+      border: none;
+      font-size: 25px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+    }
+
+    .img-content {
+      position: relative;
+    }
+
+    .favorites {
+      font-size: 25px;
+    }
+
+    .colored {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar bg-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="navbar-header">
+            <a href="#" class="navbar-brand text-light">Name</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-between my-4">
+        <h1>News & Trends</h1>
+        <span class="favorites">
+          <span class="fav-count">0</span>
+          <span class="fav-heart"><i class="fa fa-heart"></i></span>
+        </span>
+      </div>
+    </div>
+    <div class="row" id="list"></div>
+  </div>
+
+  <!-- jQuery library -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+
+  <!-- Latest Compiled Bootstrap 4.4.1 JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+  <script>
+    // Exercise III:
+    // - There is a html starter file with a setup created for you. (and an img folder)
+    // - Use the post array to render all of the cards on the screen. Place them inside the div with an id="row". There should be a skelet of how each of the cards should be made.
+    // - Clicking on the heart in each of the cards, should not lead to the link provided on every card, but should do the following things (clicking outside of it, the link should continue working):
+    // - Toggle color the heart red (use the colored class in css for this) on that card.
+    // - Count how many cards are favorited and show the number in the top right span with a class="fav-count".
+    // - When the number is bigger than 0, the heart on the top right next to the fav-count should be colored in red also, but when the number is 0, the heart should not be colored.
+
+    let posts = [
+      {
+        img: 1,
+        title:
+          "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        desc:
+          "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
+      },
+      {
+        img: 2,
+        title: "qui est esse",
+        desc:
+          "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla",
+      },
+      {
+        img: 3,
+        title: "ea molestias quasi exercitationem repellat qui ipsa sit aut",
+        desc:
+          "et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut",
+      },
+      {
+        img: 4,
+        title: "eum et est occaecati",
+        desc:
+          "ullam et saepe reiciendis voluptatem adipisci\nsit amet autem assumenda provident rerum culpa\nquis hic commodi nesciunt rem tenetur doloremque ipsam iure\nquis sunt voluptatem rerum illo velit",
+      },
+      {
+        img: 5,
+        title: "nesciunt quas odio",
+        desc:
+          "repudiandae veniam quaerat sunt sed\nalias aut fugiat sit autem sed est\nvoluptatem omnis possimus esse voluptatibus quis\nest aut tenetur dolor neque",
+      },
+      {
+        img: 6,
+        title: "dolorem eum magni eos aperiam quia",
+        desc:
+          "ut aspernatur corporis harum nihil quis provident sequi\nmollitia nobis aliquid molestiae\nperspiciatis et ea nemo ab reprehenderit accusantium quas\nvoluptate dolores velit et doloremque molestiae",
+      },
+      {
+        img: 7,
+        title: "magnam facilis autem",
+        desc:
+          "dolore placeat quibusdam ea quo vitae\nmagni quis enim qui quis quo nemo aut saepe\nquidem repellat excepturi ut quia\nsunt ut sequi eos ea sed quas",
+      },
+      {
+        img: 8,
+        title: "dolorem dolore est ipsam",
+        desc:
+          "dignissimos aperiam dolorem qui eum\nfacilis quibusdam animi sint suscipit qui sint possimus cum\nquaerat magni maiores excepturi\nipsam ut commodi dolor voluptatum modi aut vitae",
+      },
+      {
+        img: 9,
+        title: "nesciunt iure omnis dolorem tempora et accusantium",
+        desc:
+          "consectetur animi nesciunt iure dolore\nenim quia ad\nveniam autem ut quam aut nobis\net est aut quod aut provident voluptas autem voluptas",
+      },
+      {
+        img: 10,
+        title: "optio molestias id quia eum",
+        desc:
+          "quo et expedita modi cum officia vel magni\ndoloribus qui repudiandae\nvero nisi sit\nquos veniam quod sed accusamus veritatis error",
+      },
+      {
+        img: 11,
+        title: "et ea vero quia laudantium autem",
+        desc:
+          "delectus reiciendis molestiae occaecati non minima eveniet qui voluptatibus\naccusamus in eum beatae sit\nvel qui neque voluptates ut commodi qui incidunt\nut animi commodi",
+      },
+      {
+        img: 12,
+        title: "in quibusdam tempore odit est dolorem",
+        desc:
+          "itaque id aut magnam\npraesentium quia et ea odit et ea voluptas et\nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio",
+      },
+    ];
+
+    const list = document.querySelector("#list");
+
+    posts.forEach(post => {
+      list.innerHTML += `<div class="col-4 item">
+            <a href="https://www.google.com" class="link">
+                <div class="img-content">
+                    <img src="img/${post.img}.jpg">
+                        <button class="heart">
+                            <i class="fa fa-heart"></i>
+                        </button>
+                </div>
+                <div class="item-content">
+                    <h2 class="title">${post.title}</h2>
+                    <p class="paragraf">${post.desc}</p>
+                </div>
+            </a>
+        </div>`
+    });
+
+    const hearts = document.querySelectorAll(".heart");
+    const favorites = document.querySelector(".favorites");
+    let favCount = document.querySelector(".fav-count");
+
+    let counter = 0;
+    hearts.forEach(heart => {
+      heart.addEventListener("click", (event) => {
+        event.preventDefault(); //prevenira da ne klika na googgle
+        heart.classList.toggle("colored");
+        if (heart.classList.contains("colored")) {
+          counter++;
+        }
+        else {
+          counter--;
+        }
+        favCount.textContent = counter;
+
+        if (counter > 0) {
+          favorites.classList.add("colored")
+        }
+        else {
+          favorites.classList.remove("colored")
+        }
+      });
+    });
+
+      // your card skelet
+      // <div class="col-4 item">
+      //   <a href="google.com" class="link">
+      //     <div class="img-content">
+      //       <img src="img/.jpg">
+      //       <button class="heart">
+      //           <i class="fa fa-heart"></i>
+      //         </button>
+      //     </div>
+      //     <div class="item-content">
+      //       <h2 class="title">title</h2>
+      //       <p class="paragraf">description</p>
+      //     </div>
+      //   </a>
+      // </div>
+  </script>
+</body>
+
+</html>
